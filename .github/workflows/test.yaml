@@ -28,7 +28,10 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: compiled
-          path: ./packages/**/dist/
+          path: |
+            ./packages/**/dist/
+            ./node_modules
+            ./packages/**/node_modules
   test:
     needs: build
     strategy:
