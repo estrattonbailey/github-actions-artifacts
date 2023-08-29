@@ -28,10 +28,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: compiled
-          path: |
-            ./packages/**/dist/
-            ./node_modules
-            ./packages/**/node_modules
+          path: ./packages/**/dist/
   test:
     needs: build
     strategy:
@@ -51,8 +48,5 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: compiled
-      - run: ls -la packages/client
-      - run: ls -la packages/server
-      - run: ls -la packages/client/dist
-      - run: ls -la packages/server/dist
+      - run: pnpm i --frozen-lockfile
       - run: pnpm test -- --maxWorkers=2 --shard=${{ matrix.shard }}
