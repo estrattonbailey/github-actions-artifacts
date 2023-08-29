@@ -24,8 +24,13 @@ jobs:
           cache: "pnpm"
       - run: pnpm i --frozen-lockfile
       - run: pnpm build
+      - name: Upload dir
+        uses: actions/upload-artifact@v3
+        with:
+          name: homework
+          path: ./packages/**/dist/
   test:
-    needs: build
+    needs: test
     strategy:
       matrix:
         shard: [1/2, 2/2]
