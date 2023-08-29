@@ -30,7 +30,7 @@ jobs:
           name: homework
           path: ./packages/**/dist/
   test:
-    needs: test
+    needs: build
     strategy:
       matrix:
         shard: [1/2, 2/2]
