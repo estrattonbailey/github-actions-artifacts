@@ -27,7 +27,7 @@ jobs:
       - name: Upload dir
         uses: actions/upload-artifact@v3
         with:
-          name: homework
+          name: compiled
           path: ./packages/**/dist/
   test:
     needs: build
@@ -44,4 +44,12 @@ jobs:
         with:
           node-version: 18
           cache: "pnpm"
-      - run: pnpm test --maxWorkers=1 --shard=${{ matrix.shard }}
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: compiled
+      - run: ls -la packages/client
+      - run: ls -la packages/server
+      - run: ls -la packages/client/dist
+      - run: ls -la packages/server/dist
+      - run: pnpm test -- --maxWorkers=2 --shard=${{ matrix.shard }}
