@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "pnpm -r build",
     "test": "pnpm -r test"
   },
   "keywords": [],
